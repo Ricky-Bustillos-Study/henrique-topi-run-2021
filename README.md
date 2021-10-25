@@ -72,7 +72,8 @@ git push -u origin main
 # autentique-se com sua Developer Org.
 sfdx force:auth:web:login -a my-sandbox --instanceurl https://login.salesforce.com
 ```
-OU
+ou
+
     - F1 ou Ctrl + Shift + P e digite SFDX: Authorize an Org
     - selecione a opção Production (login.salesforce.com)
 
