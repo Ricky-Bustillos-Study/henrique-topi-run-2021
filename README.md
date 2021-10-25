@@ -8,19 +8,77 @@ Para enviar as classes do projeto para sua Org Salesforce vc pode executar o com
 
 # Instalação
 --------
+Você deve clonar a versão inicial antes do commit f3ca7c8 "Aula 6,7,8". O hashcode dessa versão que você deve clonar é #e3c6125
 
+## Como clonar e configurar seu repo
+-------
+```
+# clonando o repo na última versão
+git https://github.com/topinformation-public/topi-run-base-project.git
 
-``` bash
+# entrando no diretório clonado
+cd ./topi-run-base-project.git
 
-sfdx force:auth:web:login -a my-sandbox --instanceurl https://login.salesforce.com
+# alternando o repo na versão mais antiga (inicial)
+git checkout e3c6125
 
-sfdx force:mdapi:deploy -d ./src --verbose -u my-sandbox
+# apontando o remote do repositório local para seu repositório
+git remove set-url origin https://github.com/seuNickname/seuRepo.git
+
+# verificar se o remote realmente atualizou (deve apresentar seu repo)
+git remote -v
+
+# resolvendo o HEAD detached do git
+# criando sua a branch main a partir da atual
+git branch main
+
+# alteranando o repo local para a branch main recém criada
+git checkout main
+
+# subindo a branch main no seu repo do github
+# caso não funcione, tente apenas "git push"
+git push -u origin main
+
 
 ```
+## Configurando o ambiente salesforce
+-------
 **PS:** `my-sandbox` é o apelido que vc quer dar para sua Org Salesforce
 
+1. Crie um arquivo sfdx-project.json com as configurações:
+```json
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "name": "my-sandbox",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "52.0"
+}
+```
 
-Após isso basta abrir o vscode na pasta topi-run-base-project e ele já reconhecerá que é um projeto Salesforce.
+2. Instancie o projeto
+    - Pressione F1 ou Ctrl + Shift + P no vscode
+    - Selecione SFDX: Create project
+    - Atualize seu vscode para carregar as extensões do salesforce 
+        - F1 ou Ctrl + Shift + P e selecione "Developer: Reload Window"
+ 
+3. Autentique o projeto com sua Developer Org. do Salesforce (há 2 maneiras de fazer isso)
+``` bash
+# autentique-se com sua Developer Org.
+sfdx force:auth:web:login -a my-sandbox --instanceurl https://login.salesforce.com
+```
+OU
+    - F1 ou Ctrl + Shift + P e digite SFDX: Authorize an Org
+    - selecione a opção Production (login.salesforce.com)
 
-Após isso base executar o CTRL + SHIFT + P > "SFDX: Authorize an Org"
+4. Após isso, faça o deploy do projeto na sua Org.
+```sh
+sfdx force:source:deploy -p ./force-app/main/default -u my-sandbox --wait=90
+
+```
 
