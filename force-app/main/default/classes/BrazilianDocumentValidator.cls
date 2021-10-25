@@ -3,13 +3,13 @@
  */
 public class BrazilianDocumentValidator {
     /**
-     * @param  CNPJ [description]
+     * @param  Cnpj [description]
      * @return      [description]
      */
-    public boolean isCNPJ(String cnpj) {
-        
-        if (String.isEmpty(cnpj)) return false;
+    public boolean isCnpj(String cnpj) {
 
+        if ( String.isEmpty(cnpj) )
+            return false;
         cnpj = cnpj.remove('.').remove('/').remove('-');
 
         if ( !matchSameNumbersRule(cnpj) || ( cnpj.length() != 14 ) ) {
@@ -18,8 +18,8 @@ public class BrazilianDocumentValidator {
 
         List<String> cnpjString = cnpj.split('');
 
-        Integer digit13 = calculateDigitCNPJ(cnpjString, 5, 12);
-        Integer digit14 = calculateDigitCNPJ(cnpjString, 6, 13);
+        Integer digit13 = calculateDigitCnpj(cnpjString, 5, 12);
+        Integer digit14 = calculateDigitCnpj(cnpjString, 6, 13);
 
         if ( digit13 != Integer.valueOf(cnpjString.get(12)) || digit14 != Integer.valueOf(cnpjString.get(13)) )
             return false;
@@ -39,10 +39,10 @@ public class BrazilianDocumentValidator {
 
     /**
      * MOVE THIS METHOD TO another class.
-     * @param  CNPJ [description]
+     * @param  Cnpj [description]
      * @return      [description]
      */
-    private Integer calculateDigitCNPJ(List<String> cnpj, Integer weight, Integer iteration) {
+    private Integer calculateDigitCnpj(List<String> cnpj, Integer weight, Integer iteration) {
 
         Integer sum = 0;
         Integer rest;
@@ -65,10 +65,10 @@ public class BrazilianDocumentValidator {
         return Integer.valueOf(11 - rest);
     }
 
-    public boolean isCPF(String cpf) {
-        
-        if (String.isEmpty(cpf)) return false;
+    public boolean isCpf(String cpf) {
 
+        if ( String.isEmpty(cpf) )
+            return false;
         cpf = cpf.remove('.').remove('-');
 
         if ( Pattern.matches('^(\\d)\\1*$', cpf) || cpf.length() != 11 ) {
@@ -77,13 +77,13 @@ public class BrazilianDocumentValidator {
 
         List<String> cpfString = cpf.split('');
 
-        Integer digit10 = calculateDigitCPF(cpfString, 10, 9);
-        Integer digit11 = calculateDigitCPF(cpfString, 11, 10);
+        Integer digit10 = calculateDigitCpf(cpfString, 10, 9);
+        Integer digit11 = calculateDigitCpf(cpfString, 11, 10);
 
         return ( digit10 == Integer.valueOf(cpfString.get(9)) ) && ( digit11 == Integer.ValueOf(cpfString.get(10)) );
     }
 
-    private Integer calculateDigitCPF(List<String> cpf, Integer weight, Integer iteration) {
+    private Integer calculateDigitCpf(List<String> cpf, Integer weight, Integer iteration) {
 
         Integer sum = 0;
         Integer rest;
