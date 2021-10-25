@@ -43,7 +43,7 @@ git push -u origin main
 ```
 ## Configurando o ambiente salesforce
 -------
-**PS:** `my-sandbox` é o apelido que vc quer dar para sua Org Salesforce
+**PS:** `my-sandbox` é o apelido que você quer dar para sua Organização Salesforce
 
 1. Crie um arquivo sfdx-project.json com as configurações:
 ```json
