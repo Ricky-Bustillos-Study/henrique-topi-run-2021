@@ -1,29 +1,20 @@
-/**
- * @author ercarval - topi
- */
 public class AccountDocumentNumberValidator {
-
-    BrazilianDocumentValidator documentValidator;
+    BrazilianDocumentValidator brazilianDocumentValidator;
 
     public AccountDocumentNumberValidator() {
-        documentValidator = new BrazilianDocumentValidator();
+        brazilianDocumentValidator = new BrazilianDocumentValidator();
     }
 
-    public void validate (List<Account> accounts) {
+    public void validate(List<Account> accounts) {
 
-        for (Account account : accounts ) {
-
-            if ( isValid (account.DocumentNumber__c) ) {
-                account.DocumentNumber__c.addError('Numero do Documento inválido');
+        for ( Account account : accounts ) {
+            if ( !isValid(account.DocumentNumber__c) ) {
+                account.DocumentNumber__c.addError( 'Invalid Document Number' );
             }
-
         }
-
     }
 
-    private Boolean isValid ( String document ) {
-        return documentValidator.isCPF( document )
-                    || documentValidator.isCNPJ(document);
+    private Boolean isValid(String documentNumber) {
+        return brazilianDocumentValidator.isCpf(documentNumber) || brazilianDocumentValidator.isCnpj(documentNumber);
     }
-
 }
