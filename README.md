@@ -1,10 +1,10 @@
 # Projeto Base Topi Run 2021
 ----
-Após ter clonado esse repositório, vc pode mescla-lo com o seu projeto.
+Após ter clonado esse repositório, vc pode mesclá-lo com o seu projeto.
 
 Ele já te fornece uma estrutura básica, com alguns pontos que vimos em aula.
 
-Para enviar as classes do projeto para sua Org Salesforce vc pode executar o comando abaixo no command do DOS
+Para enviar as classes do projeto para sua Org Salesforce você pode seguir o passo a passo abaixo
 
 # Instalação
 --------
@@ -14,7 +14,7 @@ Você deve clonar a versão inicial antes do commit f3ca7c8 "Aula 6,7,8". O hash
 -------
 ```
 # clonando o repo na última versão
-git https://github.com/topinformation-public/topi-run-base-project.git
+git clone https://github.com/topinformation-public/topi-run-base-project.git
 
 # entrando no diretório clonado
 cd ./topi-run-base-project.git
