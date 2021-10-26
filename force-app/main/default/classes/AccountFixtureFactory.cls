@@ -9,6 +9,7 @@ public class AccountFixtureFactory {
                         , DocumentNumber__c = '40959705880'
                         , BillingCity = 'Sao Jose dos Campos'
                         , BillingCountry = 'Brasil'
+                        , Category__c = 'Premium'
                         , AnnualRevenue = annualRevenue);
     }
 

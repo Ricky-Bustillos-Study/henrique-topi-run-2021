@@ -16,7 +16,7 @@ public class EventEnricherTest {
 
         Test.stopTest();
 
-        System.assert(createdEvents.size() == 1);
+        System.assertEquals(createdEvents.size(), 1);
 
         Event createdEvent = createdEvents.get(0);
 

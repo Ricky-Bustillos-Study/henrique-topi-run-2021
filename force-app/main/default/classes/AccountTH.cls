@@ -37,6 +37,11 @@ public with sharing class AccountTH extends TriggerHandler {
         this.eventEnricher = new EventEnricher();
     }
 
+    override public void afterInsert() {
+
+        createEventToPremiumAccounts();
+    }
+
     override public void beforeUpdate() {
 
         validateDocumentNumber();
@@ -46,26 +51,19 @@ public with sharing class AccountTH extends TriggerHandler {
 
     public void validateDocumentNumber() {
 
-        List<Account> filteredAccountWithDocumentNumber = this.filter.filterNotEmptyDocumentNumber(newAccounts);
+        List<Account> filteredAccountWithDocumentNumber = this.filter.filterNotEmptyDocumentNumber(this.newAccounts);
 
-        this.documentValidator.validate(newAccounts);
+        this.documentValidator.validate(this.newAccounts);
     }
 
     public void enrichAccounts() {
-        this.enricher.enrich(this.filter.filterWithValidDocumentNumber(newAccounts));
+        this.enricher.enrich(this.filter.filterWithValidDocumentNumber(this.newAccounts));
     }
 
-    override public void afterUpdate() {
-    }
-
-    override public void afterInsert() {
-
-        createEventToPremiumAccounts();
-    }
 
     public void createEventToPremiumAccounts() {
 
-        List<Account> filteredPremiumAccounts = this.filter.filterWithPremiumCategory(newAccounts);
+        List<Account> filteredPremiumAccounts = this.filter.filterWithPremiumCategory(this.newAccounts);
 
         List<Account> filteredWithAnnualRevenueGreatherThanOneMillion = this.filter.filterWithAnnualRevenueGreatherThanOneMillion(filteredPremiumAccounts);
 
