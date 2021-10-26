@@ -56,8 +56,6 @@ public with sharing class AccountTH extends TriggerHandler {
     }
 
     override public void afterUpdate() {
-
-        createEventToPremiumAccounts();
     }
 
     override public void afterInsert() {
