@@ -57,7 +57,7 @@ public with sharing class AccountTH extends TriggerHandler {
     }
 
     public void enrichAccounts() {
-        this.enricher.enrich(this.filter.filterWithValidDocumentNumber(this.newAccounts));
+        this.enricher.enrich(this.filter.filterWithDocumentNumberWithNoErrors(this.newAccounts));
     }
 
 

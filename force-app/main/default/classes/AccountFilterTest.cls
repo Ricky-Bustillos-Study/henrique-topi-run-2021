@@ -49,4 +49,30 @@ public class AccountFilterTest {
         System.assertEquals(filteredAccounts.size(), 2);
         System.assert(filteredAccounts.iterator().next().Category__c == 'Premium');
     }
+
+    @isTest
+    public static void givenAccountListWhenFilterValidDocumentNumberThenReturnDocumentsWithNoErrors() {
+
+        // Criar uma fixture factory
+        List<Account> accounts = new List<Account>{ 
+            new Account( Name = 'Ricky', DocumentNumber__c = '123' ), 
+            new Account( Name = 'Henrique', DocumentNumber__c = '' ), 
+            new Account( Name = 'Bissolino', DocumentNumber__c = '21056256477'),
+            new Account( Name = 'Eduardo', DocumentNumber__c = '516.526.425-88'),
+            new Account( Name = 'Bisso', DocumentNumber__c = '10871666000179' )
+        };
+
+        accounts.get(0).addError('Invalid');
+
+        AccountFilter filter = new AccountFilter();
+
+        Test.startTest();
+
+        List<Account> filteredAccounts = filter.filterWithDocumentNumberWithNoErrors(accounts);
+
+        Test.stopTest();
+
+        System.assert(!filteredAccounts.isEmpty());
+        System.assertEquals(3, filteredAccounts.size());
+    }
 }

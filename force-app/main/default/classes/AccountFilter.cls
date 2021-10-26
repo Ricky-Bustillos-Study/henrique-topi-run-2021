@@ -17,7 +17,7 @@ public class AccountFilter {
         return filteredAccountsWithDocument;
     }
 
-    public List<Account> filterWithValidDocumentNumber(List<Account> accounts) {
+    public List<Account> filterWithDocumentNumberWithNoErrors(List<Account> accounts) {
 
         List<Account> filteredAccounts = new List<Account>();
 
