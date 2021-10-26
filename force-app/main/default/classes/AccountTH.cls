@@ -63,7 +63,7 @@ public with sharing class AccountTH extends TriggerHandler {
 
     public void createEventToPremiumAccounts() {
 
-        List<Account> filteredPremiumAccounts = this.filter.filterWithPremiumCategory(this.newAccounts);
+        List<Account> filteredPremiumAccounts = this.filter.filterWithCategory(this.newAccounts, 'Premium');
 
         List<Account> filteredWithAnnualRevenueGreatherThanOneMillion = this.filter.filterWithAnnualRevenueGreatherThanOneMillion(filteredPremiumAccounts);
 

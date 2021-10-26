@@ -29,7 +29,7 @@ public class AccountFilter {
         return filteredAccounts;
     }
 
-    public List<Account> filterWithPremiumCategory(List<Account> accounts) {
+    public List<Account> filterWithCategory(List<Account> accounts, String category) {
 
         List<Account> filteredPremiumAccounts = new List<Account>();
 
