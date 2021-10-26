@@ -3,30 +3,26 @@
  */
 @isTest(seeAllData = true)
 public class AccountRepositoryTest {
-    
     @isTest
-    public static void givenValidAccountWhenSaveThenReturnAccountWithId () {
+    public static void givenValidAccountWhenSaveThenReturnAccountWithId() {
 
         AccountRepository repository = new AccountRepository();
-        
+
         Test.startTest();
 
-        List<Account> accounts = repository.save( new List<Account> { AccountFixtureFactory.newAccount() } );
+        List<Account> accounts = repository.save(new List<Account>{ AccountFixtureFactory.newAccount() });
 
         Test.stopTest();
-        
+
         System.assert(accounts != null);
         System.assert(!accounts.isEmpty());
-        System.assertEquals( 1 , accounts.size());
-        
-        System.assert( accounts.get(0).Id != null );
-        
+        System.assertEquals(1, accounts.size());
 
+        System.assert(accounts.get(0).Id != null);
     }
-    
 
     @isTest
-    public static void givenCreatedAccountWhenFindByIdThenReturnStoredAccount () {
+    public static void givenCreatedAccountWhenFindByIdThenReturnStoredAccount() {
 
         Account account = AccountFixtureFactory.createAccount();
 
@@ -34,19 +30,17 @@ public class AccountRepositoryTest {
 
         Test.startTest();
 
-        List<Account> accounts = repository.findById( account.Id );        
+        List<Account> accounts = repository.findById(account.Id);
 
         Test.stopTest();
 
         System.assert(!accounts.isEmpty());
 
-        System.assertEquals( 1 , accounts.size());
-        
+        System.assertEquals(1, accounts.size());
+
         Account storedAccount = accounts.get(0);
-        
-        System.assertEquals( account.Id, storedAccount.Id );      
-        System.assert( storedAccount.BillingCity != null );
 
+        System.assertEquals(account.Id, storedAccount.Id);
+        System.assert(storedAccount.BillingCity != null);
     }
-
 }
