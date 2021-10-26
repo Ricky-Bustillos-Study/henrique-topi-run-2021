@@ -1,22 +1,17 @@
 /**
  * @author ercarval - topi
- * 
+ *
  * Quase sempre ter esses comportamentos
- * 
+ *
  * Filtrar
- * Validação 
+ * Validação
  * Enriquecer
  * Integração Sistêmica
  */
-
-
-
-
 public with sharing class AccountTH extends TriggerHandler {
-
     List<Account> newAccounts;
 
-    Map<Id,Account> oldAccounts;
+    Map<Id, Account> oldAccounts;
 
     AccountFilter filter;
 
@@ -24,47 +19,60 @@ public with sharing class AccountTH extends TriggerHandler {
 
     AccountEnricher enricher;
 
-    public AccountTH() {
-        this( (List<Account>) Trigger.new 
-            , (Map<Id,Account>) Trigger.oldMap );
-    } 
+    EventRepository eventRepository;
 
-    public AccountTH(List<Account> newAccounts, Map<Id,Account> oldAccounts) {
+    EventEnricher eventEnricher;
+
+    public AccountTH() {
+        this( ( List<Account> )Trigger.new, ( Map<Id, Account> )Trigger.oldMap );
+    }
+
+    public AccountTH(List<Account> newAccounts, Map<Id, Account> oldAccounts) {
         this.newAccounts = newAccounts;
         this.oldAccounts = oldAccounts;
         this.filter = new AccountFilter();
         this.documentValidator = new AccountDocumentNumberValidator();
         this.enricher = new AccountEnricher();
+        this.eventRepository = new EventRepository();
+        this.eventEnricher = new EventEnricher();
     }
 
-    override
-    public void beforeUpdate() {
+    override public void beforeUpdate() {
 
-        validateDocumentNumber ();
+        validateDocumentNumber();
 
         enrichAccounts();
-        
     }
 
-    public void validateDocumentNumber () {
+    public void validateDocumentNumber() {
 
-        List<Account> filteredAccountWithDocumentNumber =
-                             filter.filterNotEmptyDocumentNumber(newAccounts);
+        List<Account> filteredAccountWithDocumentNumber = this.filter.filterNotEmptyDocumentNumber(newAccounts);
 
-        documentValidator.validate(newAccounts);
-
+        this.documentValidator.validate(newAccounts);
     }
 
-    public void enrichAccounts () {
-        this.enricher.enrich( 
-            this.filter.filterWithValidDocumentNumber (newAccounts) );
+    public void enrichAccounts() {
+        this.enricher.enrich(this.filter.filterWithValidDocumentNumber(newAccounts));
     }
 
-    override
-    public void afterUpdate() {
+    override public void afterUpdate() {
 
+        createEventToPremiumAccounts();
     }
 
+    override public void afterInsert() {
 
+        createEventToPremiumAccounts();
+    }
 
+    public void createEventToPremiumAccounts() {
+
+        List<Account> filteredPremiumAccounts = this.filter.filterWithPremiumCategory(newAccounts);
+
+        List<Account> filteredWithAnnualRevenueGreatherThanOneMillion = this.filter.filterWithAnnualRevenueGreatherThanOneMillion(filteredPremiumAccounts);
+
+        List<Event> eventsToCreate = this.eventEnricher.enrichForPremiumAccountPresentation(filteredWithAnnualRevenueGreatherThanOneMillion);
+
+        this.eventRepository.save(eventsToCreate);
+    }
 }
