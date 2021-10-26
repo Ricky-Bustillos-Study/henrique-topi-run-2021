@@ -27,30 +27,6 @@ public class AccountFilterTest {
     }
 
     @isTest
-    public static void givenAccountListWhenFilterByCategoryThenReturnOnlyPremium() {
-
-        // Criar uma fixture factory
-        List<Account> accounts = new List<Account>{ 
-            new Account( Name = 'Ricky', Category__c = 'Premium', AnnualRevenue = 1300500 ), 
-            new Account( Name = 'Henrique', Category__c = 'Premium', AnnualRevenue = 640500 ), 
-            new Account( Name = 'Bissolino', Category__c = 'Standard', AnnualRevenue = 500600 ),
-            new Account( Name = 'Bisso', Category__c = 'Standard', AnnualRevenue = 1500200 )
-        };
-
-        AccountFilter filter = new AccountFilter();
-
-        Test.startTest();
-
-        List<Account> filteredAccounts = filter.filterWithCategory(accounts, 'Premium');
-
-        Test.stopTest();
-
-        System.assert(!filteredAccounts.isEmpty());
-        System.assertEquals(filteredAccounts.size(), 2);
-        System.assert(filteredAccounts.iterator().next().Category__c == 'Premium');
-    }
-
-    @isTest
     public static void givenAccountListWhenFilterValidDocumentNumberThenReturnDocumentsWithNoErrors() {
 
         // Criar uma fixture factory
@@ -74,5 +50,52 @@ public class AccountFilterTest {
 
         System.assert(!filteredAccounts.isEmpty());
         System.assertEquals(3, filteredAccounts.size());
+    }
+    
+    @isTest
+    public static void givenAccountListWhenFilterByCategoryThenReturnOnlyPremium() {
+
+        // Criar uma fixture factory
+        List<Account> accounts = new List<Account>{ 
+            new Account( Name = 'Ricky', Category__c = 'Premium', AnnualRevenue = 1300500 ), 
+            new Account( Name = 'Henrique', Category__c = 'Premium', AnnualRevenue = 640500 ), 
+            new Account( Name = 'Bissolino', Category__c = 'Standard', AnnualRevenue = 500600 ),
+            new Account( Name = 'Bisso', Category__c = 'Standard', AnnualRevenue = 1500200 )
+        };
+
+        AccountFilter filter = new AccountFilter();
+
+        Test.startTest();
+
+        List<Account> filteredAccounts = filter.filterWithCategory(accounts, 'Premium');
+
+        Test.stopTest();
+
+        System.assert(!filteredAccounts.isEmpty());
+        System.assertEquals(filteredAccounts.size(), 2);
+        System.assert(filteredAccounts.iterator().next().Category__c == 'Premium');
+    }
+    
+    @isTest
+    public static void givenAccountListWhenFilterByAnnualRevenueThenReturnGratherThanOneMillion() {
+
+        // Criar uma fixture factory
+        List<Account> accounts = new List<Account>{ 
+            new Account( Name = 'Ricky', Category__c = 'Premium', AnnualRevenue = 1300500 ), 
+            new Account( Name = 'Henrique', Category__c = 'Premium', AnnualRevenue = 640500 ), 
+            new Account( Name = 'Bissolino', Category__c = 'Standard', AnnualRevenue = 500600 ),
+            new Account( Name = 'Bisso', Category__c = 'Standard', AnnualRevenue = 1500200 )
+        };
+
+        AccountFilter filter = new AccountFilter();
+
+        Test.startTest();
+
+        List<Account> filteredAccounts = filter.filterWithAnnualRevenueGreatherThanOneMillion(accounts);
+
+        Test.stopTest();
+
+        System.assert(!filteredAccounts.isEmpty());
+        System.assertEquals(2, filteredAccounts.size());
     }
 }
