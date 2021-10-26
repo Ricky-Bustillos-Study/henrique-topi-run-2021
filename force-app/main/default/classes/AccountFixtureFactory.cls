@@ -4,6 +4,14 @@
 @isTest
 public class AccountFixtureFactory {
 
+    public static Account newPremiumAccount ( Decimal annualRevenue ) {
+        return new Account (Name = 'Henrique'
+                        , DocumentNumber__c = '40959705880'
+                        , BillingCity = 'Sao Jose dos Campos'
+                        , BillingCountry = 'Brasil'
+                        , AnnualRevenue = annualRevenue);
+    }
+
     public static Account newAccount ( String name, String billingCountry ) {
         return new Account (Name = name
                         , DocumentNumber__c = '40959705880'
@@ -22,6 +30,10 @@ public class AccountFixtureFactory {
     public static Account createAccount ( String name, String billingCountry ) {
         return createAccount ( newAccount(name, billingCountry) );
     }
+
+    public static Account createPremiumAccount ( Decimal annualRevenue ) {
+        return createAccount( newPremiumAccount(annualRevenue) );
+     }
 
     public static Account createAccount (Account account) {
         insert account;
