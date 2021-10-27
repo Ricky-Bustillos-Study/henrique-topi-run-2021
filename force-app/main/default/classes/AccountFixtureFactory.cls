@@ -37,8 +37,11 @@ public class AccountFixtureFactory {
      }
 
     public static Account createAccount (Account account) {
-        insert account;
-        return account;
+        AccountRepository accountRepository = new AccountRepository();
+
+        List<Account> createdAccount = accountRepository.save(account);
+
+        return createdAccount[0];
     }
 
 }

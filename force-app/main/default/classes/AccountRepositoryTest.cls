@@ -43,4 +43,46 @@ public class AccountRepositoryTest {
         System.assertEquals(account.Id, storedAccount.Id);
         System.assert(storedAccount.BillingCity != null);
     }
+
+    @isTest
+    public static void givenCreatedAccountWhenFindByBillingCountryThenReturnStoredAccount() {
+
+        Account account = AccountFixtureFactory.createAccount();
+
+        AccountRepository repository = new AccountRepository();
+
+        Test.startTest();
+
+        List<Account> accounts = repository.findByBillingCountry(account.billingCountry);
+
+        Test.stopTest();
+
+        System.assert(!accounts.isEmpty());
+
+        System.assertEquals(1, accounts.size());
+
+        Account storedAccount = accounts.get(0);
+
+        System.assert(storedAccount.BillingCountry == account.BillingCountry);
+    }
+
+    @isTest
+    public static void givenDeletedRegisteredAccountWhenFindByIdThenReturnNull() {
+
+        Account account = AccountFixtureFactory.createAccount();
+
+        AccountRepository repository = new AccountRepository();
+        
+        repository.remove(account);
+
+        Test.startTest();
+
+        List<Account> accounts = repository.findById(account.Id);
+
+        Test.stopTest();
+
+        System.assert(accounts.isEmpty());
+                
+        
+    }
 }
