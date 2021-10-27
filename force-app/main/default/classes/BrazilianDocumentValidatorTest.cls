@@ -22,4 +22,20 @@ private class BrazilianDocumentValidatorTest {
 
     }
 
+    @isTest
+    public static void givenInvalidCnpjWhenValidate13DigitThenReturnFalse() {
+        
+        String cnpj = '59541264000113';
+
+        System.assert(new BrazilianDocumentValidator().isCnpj (cnpj) == false);
+    }
+
+    @isTest
+    public static void givenInvalidCnpjWhenMatchSameNumbersRuleThenReturnFalse() {
+        
+        String cnpj = '1';
+
+        System.assert(new BrazilianDocumentValidator().isCnpj (cnpj) == false);
+    }
+
 }
