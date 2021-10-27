@@ -6,12 +6,8 @@ public class AccountFilterTest {
     @isTest
     public static void givenAccountWithDocumentNumberWhenFilterThenSubListOnlyWithNotEmptyDocumentNumber() {
 
-        // Criar uma fixturefactory
-        List<Account> accounts = new List<Account>{ 
-            new Account( DocumentNumber__c = '123' ), 
-            new Account( DocumentNumber__c = '', Name = 'Ricky' ), 
-            new Account( Name = 'RickyBustillos' ) 
-        };
+        
+        List<Account> accounts = AccountFixtureFactory.createAccountList();
 
         AccountFilter filter = new AccountFilter();
 
@@ -22,21 +18,14 @@ public class AccountFilterTest {
         Test.stopTest();
 
         System.assert(!filteredAccounts.isEmpty());
-        System.assertEquals(1, filteredAccounts.size());
+        System.assertEquals(5, filteredAccounts.size());
         System.assertEquals('123', filteredAccounts.get(0).DocumentNumber__c);
     }
 
     @isTest
     public static void givenAccountListWhenFilterValidDocumentNumberThenReturnDocumentsWithNoErrors() {
 
-        // Criar uma fixture factory
-        List<Account> accounts = new List<Account>{ 
-            new Account( Name = 'Ricky', DocumentNumber__c = '123' ), 
-            new Account( Name = 'Henrique', DocumentNumber__c = '' ), 
-            new Account( Name = 'Bissolino', DocumentNumber__c = '21056256477'),
-            new Account( Name = 'Eduardo', DocumentNumber__c = '516.526.425-88'),
-            new Account( Name = 'Bisso', DocumentNumber__c = '10871666000179' )
-        };
+        List<Account> accounts = AccountFixtureFactory.createAccountList();
 
         accounts.get(0).addError('Invalid');
 
@@ -49,19 +38,13 @@ public class AccountFilterTest {
         Test.stopTest();
 
         System.assert(!filteredAccounts.isEmpty());
-        System.assertEquals(3, filteredAccounts.size());
+        System.assertEquals(4, filteredAccounts.size());
     }
     
     @isTest
     public static void givenAccountListWhenFilterByCategoryThenReturnOnlyPremium() {
 
-        // Criar uma fixture factory
-        List<Account> accounts = new List<Account>{ 
-            new Account( Name = 'Ricky', Category__c = 'Premium', AnnualRevenue = 1300500 ), 
-            new Account( Name = 'Henrique', Category__c = 'Premium', AnnualRevenue = 640500 ), 
-            new Account( Name = 'Bissolino', Category__c = 'Standard', AnnualRevenue = 500600 ),
-            new Account( Name = 'Bisso', Category__c = 'Standard', AnnualRevenue = 1500200 )
-        };
+        List<Account> accounts = AccountFixtureFactory.createAccountList();
 
         AccountFilter filter = new AccountFilter();
 
@@ -79,13 +62,7 @@ public class AccountFilterTest {
     @isTest
     public static void givenAccountListWhenFilterByAnnualRevenueThenReturnGratherThanOneMillion() {
 
-        // Criar uma fixture factory
-        List<Account> accounts = new List<Account>{ 
-            new Account( Name = 'Ricky', Category__c = 'Premium', AnnualRevenue = 1300500 ), 
-            new Account( Name = 'Henrique', Category__c = 'Premium', AnnualRevenue = 640500 ), 
-            new Account( Name = 'Bissolino', Category__c = 'Standard', AnnualRevenue = 500600 ),
-            new Account( Name = 'Bisso', Category__c = 'Standard', AnnualRevenue = 1500200 )
-        };
+        List<Account> accounts = AccountFixtureFactory.createAccountList();
 
         AccountFilter filter = new AccountFilter();
 
@@ -96,6 +73,6 @@ public class AccountFilterTest {
         Test.stopTest();
 
         System.assert(!filteredAccounts.isEmpty());
-        System.assertEquals(2, filteredAccounts.size());
+        System.assertEquals(3, filteredAccounts.size());
     }
 }
