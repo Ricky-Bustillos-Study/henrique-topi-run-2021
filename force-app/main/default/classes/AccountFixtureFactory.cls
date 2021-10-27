@@ -17,7 +17,7 @@ public class AccountFixtureFactory {
 
     public static Account newPremiumAccount ( Decimal annualRevenue ) {
         return new Account (Name = 'Henrique'
-                        , DocumentNumber__c = '40959705880'
+                        , DocumentNumber__c = '54821785790'
                         , BillingCity = 'Sao Jose dos Campos'
                         , BillingCountry = 'Brasil'
                         , Category__c = 'Premium'
@@ -26,7 +26,7 @@ public class AccountFixtureFactory {
 
     public static Account newAccount ( String name, String billingCountry ) {
         return new Account(Name = name
-                        , DocumentNumber__c = '40959705880'
+                        , DocumentNumber__c = '54821785790'
                         , BillingCity = 'Sao Jose dos Campos'
                         , BillingCountry =  billingCountry);
     }

@@ -11,7 +11,7 @@ public virtual class AccountRepository extends AbstractRepository {
         return [SELECT Id, AccountNumber, AccountSource, Active__c, 
                        AnnualRevenue, BillingAddress, BillingCity, BillingCountry, 
                        BillingGeocodeAccuracy, BillingLatitude, BillingLongitude, BillingPostalCode, 
-                       BillingState, BillingStreet, Category__c
+                       BillingState, BillingStreet, Category__c, DocumentNumber__c
                 FROM Account
                 WHERE Id IN :ids];
     }
@@ -20,7 +20,7 @@ public virtual class AccountRepository extends AbstractRepository {
         return [SELECT Id, AccountNumber, AccountSource, Active__c, 
                        AnnualRevenue, BillingAddress, BillingCity, BillingCountry, 
                        BillingGeocodeAccuracy, BillingLatitude, BillingLongitude, BillingPostalCode, 
-                       BillingState, BillingStreet, Category__c
+                       BillingState, BillingStreet, Category__c, DocumentNumber__c
                 FROM Account
                 WHERE BillingCountry = :billingCountry];
     }
