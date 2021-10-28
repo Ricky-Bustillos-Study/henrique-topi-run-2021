@@ -17,4 +17,9 @@ public class GetAccountAddressOutboundService {
 
         return this.transformer.toAccount(response, account);
     }
+
+    // for test injection
+    public void setService(GetViaCepAddressOutboundService service) {
+        this.service = service;
+    }
 }

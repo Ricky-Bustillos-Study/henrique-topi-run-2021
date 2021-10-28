@@ -1,12 +1,9 @@
 /**
  * @author rickybustillos
  */
-public class GetViaCepAddressOutboundService {
+public virtual class GetViaCepAddressOutboundService {
 
-    public GetViaCepAddressOutboundService() {
-    }
-
-    public ViaCepZipCodeAddressResponse getViaCepAddress(String zipCode) {
+    virtual public ViaCepZipCodeAddressResponse getViaCepAddress(String zipCode) {
 
         HttpRequest request = new HttpRequest();
         request.setMethod('GET');
@@ -15,7 +12,7 @@ public class GetViaCepAddressOutboundService {
 
         Http http = new Http();
         HttpResponse response = http.send(request);
-        
+
         ViaCepZipCodeAddressResponse address = (ViaCepZipCodeAddressResponse)JSON.deserialize(response.getBody(), ViaCepZipCodeAddressResponse.class );
 
         return address;
