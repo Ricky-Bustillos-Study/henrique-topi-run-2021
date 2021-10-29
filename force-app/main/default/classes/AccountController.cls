@@ -11,11 +11,27 @@ global with sharing class AccountController {
     }
     
     @HttpPost
-    global static Account create (Account account) {
+    global static void create (AccountRequest request) {
 
-        Account savedAccount = (Account) repository.save(account).get(0);
+        RestResponse response = RestContext.response;
+        response.statuscode = 200;
+        response.headers.put('Content-Type', 'application/json');
 
-        return savedAccount;
+        Savepoint savepoint = Database.setSavepoint();
+        
+        try {
+            repository.save(request.account);
+            repository.saveRelated(request.contacts, request.account.Id, 'AccountId');
+            response.responseBody = Blob.valueOf( JSON.serialize(request) );
+
+        } catch (RepositoryException e) {
+            throw e;
+            
+        } catch (Exception e) {
+            Database.rollback(savepoint);
+            response.statusCode = 400;
+            response.responseBody = Blob.valueOf( '{ "error": "' + e.getMessage() + '" }' );
+        }
     }
 
     @HttpPut
