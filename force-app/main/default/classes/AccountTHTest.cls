@@ -15,7 +15,7 @@ public class AccountTHTest {
     System.runAs(user) {
       
       accountToEdit.DocumentNumber__c = '66435228540';
-      update accountToEdit;
+      accountRepository.save(accountToEdit);
 
       Account editedAccount = accountRepository.findById(accountToEdit.Id)[0];
   
