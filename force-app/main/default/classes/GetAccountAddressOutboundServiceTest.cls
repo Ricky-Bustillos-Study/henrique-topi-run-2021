@@ -20,7 +20,8 @@ public class GetAccountAddressOutboundServiceTest {
 
     public class GetViaCepAddressOutboundServiceMock extends GetViaCepAddressOutboundService {
 
-        override public ViaCepZipCodeAddressResponse getViaCepAddress(String zipCode) {
+        override 
+        public ViaCepZipCodeAddressResponse getViaCepAddress(String zipCode) {
             return ViaCepZipCodeAddressFixtureFactory.newViaCepZipCodeAddressResponse();
         }
     }

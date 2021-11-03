@@ -37,12 +37,14 @@ public with sharing class AccountTH extends TriggerHandler {
         this.eventEnricher = new EventEnricher();
     }
 
-    override public void afterInsert() {
+    override 
+    public void afterInsert() {
 
         createEventToPremiumAccounts();
     }
 
-    override public void beforeUpdate() {
+    override 
+    public void beforeUpdate() {
 
         validateDocumentNumber();
 
@@ -67,8 +69,7 @@ public with sharing class AccountTH extends TriggerHandler {
 
         List<Account> filteredWithAnnualRevenueGreatherThanOneMillion = this.filter.filterWithAnnualRevenueGreatherThanOneMillion(filteredPremiumAccounts);
 
-        List<Event> eventsToCreate = this.eventEnricher.enrichForPremiumAccountPresentation(filteredWithAnnualRevenueGreatherThanOneMillion);
+        this.eventEnricher.enrichForPremiumAccountPresentation(filteredWithAnnualRevenueGreatherThanOneMillion);
 
-        this.eventRepository.save(eventsToCreate);
     }
 }

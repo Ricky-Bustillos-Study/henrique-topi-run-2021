@@ -4,6 +4,8 @@
 public class EventEnricher {
     public List<Event> enrichForPremiumAccountPresentation(List<Account> accounts) {
 
+        EventRepository eventRepository = new EventRepository();
+
         List<Event> eventsToCreate = new List<Event>();
 
         for ( Account account : accounts ) {
@@ -17,6 +19,7 @@ public class EventEnricher {
             event.ContactType__c = 'Telefônico';
             eventsToCreate.add(event) ;
         }
-        return eventsToCreate;
+        
+        return eventRepository.save(eventsToCreate);
     }
 }
