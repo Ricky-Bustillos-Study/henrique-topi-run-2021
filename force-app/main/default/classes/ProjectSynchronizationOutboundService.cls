@@ -1,26 +1,36 @@
 /**
- * @author rickybustillos 
+ * @author rickybustillos
  */
 public class ProjectSynchronizationOutboundService {
 
     ProjectTransformer transformer;
 
     ProjectRepository repository;
-    
+
+    ProjectEnricher enricher;
+
+    TopiRun2021ProjectOutboundService outboundService;
+
     public ProjectSynchronizationOutboundService() {
         this.transformer = new ProjectTransformer();
         this.repository = new ProjectRepository();
+        this.outboundService = new TopiRun2021ProjectOutboundService();
+        this.enricher = new ProjectEnricher();
     }
 
-    public Project__c putProject(Project__c project) {
+    public void putProject(Project__c project) {
 
-        TopiRun2021Project transformedProject = transformer.toTopiRun2021Project(project);
+        TopiRun2021ProjectRequest transformedProject = transformer.toTopiRun2021Project(project);
 
-        // todo: create a JSON object to send
-        // todo: set PUT request to TopiRun2021 API
-        // todo: if status code is 200, update SyncStatus & LastSyncDate
-        // todo: if not, update ErrorMessage
+        HttpResponse response = this.outboundService.putTopiRun2021Project(transformedProject);
 
-        return project;
+        if ( response.getStatusCode() != 200 ) {
+            TopiRun2021ErrorResponse errorResponse = (TopiRun2021ErrorResponse) JSON.deserialize(response.getBody(), TopiRun2021ErrorResponse.class);
+
+            this.enricher.withError(project, errorResponse);
+
+        } else {
+            this.enricher.withSuccessSyncStatus(project);
+        }
     }
 }

@@ -1,7 +1,7 @@
 /**
  * @author rickybustillos 
  */
-public class TopiRun2021Project {
+public class TopiRun2021ProjectRequest {
 
     public String name;
     public String code;
@@ -10,6 +10,6 @@ public class TopiRun2021Project {
     public Date endDate;
     public Double budget;
 
-    public TopiRun2021Project() {
+    public TopiRun2021ProjectRequest() {
     }
 }

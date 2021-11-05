@@ -1,11 +1,11 @@
 /**
- * @author rickybustillos 
+ * @author rickybustillos
  */
 public class ProjectTransformer {
 
-  public TopiRun2021Project toTopiRun2021Project(Project__c project) {
+  public TopiRun2021ProjectRequest toTopiRun2021Project(Project__c project) {
 
-    TopiRun2021Project topiRun2021Project = new TopiRun2021Project();
+    TopiRun2021ProjectRequest topiRun2021Project = new TopiRun2021ProjectRequest();
 
     topiRun2021Project.name = project.Name;
     topiRun2021Project.code = project.Code__c;
@@ -15,6 +15,5 @@ public class ProjectTransformer {
     topiRun2021Project.budget = project.Budget__c;
 
     return topiRun2021Project;
-
   }
 }
