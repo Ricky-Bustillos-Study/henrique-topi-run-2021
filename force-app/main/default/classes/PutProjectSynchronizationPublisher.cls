@@ -14,7 +14,7 @@ public class PutProjectSynchronizationPublisher {
 
     public void publish(List<Project__c> projects) {
         for (Project__c project : projects) {
-            System.enqueueJob(new QueuedProjectSynchronizationOutbound(project));
+            System.enqueueJob(new QueuedProjectSynchronizationOutbound( new Project__c(Id = project.Id) ));
         }
     }
 

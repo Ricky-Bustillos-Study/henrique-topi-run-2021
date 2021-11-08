@@ -20,6 +20,8 @@ public class ProjectSynchronizationOutboundService {
 
     public void putProject(Project__c project) {
 
+        project = this.repository.findById(project.Id);
+
         TopiRun2021ProjectRequest transformedProject = transformer.toTopiRun2021Project(project);
 
         HttpResponse response = this.outboundService.putTopiRun2021Project(transformedProject);
@@ -27,9 +29,11 @@ public class ProjectSynchronizationOutboundService {
         if ( response.getStatusCode() != 200 ) {
             TopiRun2021ErrorResponse errorResponse = (TopiRun2021ErrorResponse) JSON.deserialize(response.getBody(), TopiRun2021ErrorResponse.class);
 
+            System.debug('Retornou erro');
             this.enricher.withError(project, errorResponse);
-
+            
         } else {
+            System.debug('Retornou sucesso');
             this.enricher.withSuccessSyncStatus(project);
         }
     }
