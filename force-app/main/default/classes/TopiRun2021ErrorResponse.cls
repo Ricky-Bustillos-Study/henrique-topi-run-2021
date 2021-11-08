@@ -4,4 +4,8 @@ public class TopiRun2021ErrorResponse {
 
     public TopiRun2021ErrorResponse() {
     }
+
+    public TopiRun2021ErrorResponse(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
 }
