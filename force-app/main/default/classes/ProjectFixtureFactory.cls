@@ -17,5 +17,17 @@ public class ProjectFixtureFactory {
         );
     }
 
+    public static Project__c createProject () {
+        return createProject( newProject() );
+    }
+
+    public static Project__c createProject (Project__c project) {
+
+        ProjectRepository repository = new ProjectRepository();
+
+        List<Project__c> createdProject = repository.save(project);
+
+        return createdProject.get(0);
+    }
 
 }
