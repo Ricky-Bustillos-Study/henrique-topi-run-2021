@@ -14,6 +14,7 @@ virtual public class ProjectRepository extends AbstractRepository {
 		            StartDate__c, EndDate__c, Budget__c, 
 					SynchronizationStatus__c, LastSyncDate__c, Type__c
 		        FROM Project__c
-		        WHERE Id = :id ];
+		        WHERE Id = :id 
+						LIMIT 1];
 	}
 }
