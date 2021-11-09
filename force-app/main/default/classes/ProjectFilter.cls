@@ -1,8 +1,8 @@
 /**
- * @author rickybustillos 
+ * @author rickybustillos
  */
 public class ProjectFilter {
-    
+
     public List<Project__c> byType(List<Project__c> projects, String type) {
         List<Project__c> filteredProjects = new List<Project__c>();
 
@@ -23,7 +23,7 @@ public class ProjectFilter {
                 filteredProjects.add(project);
             }
         }
-        
+
         return filteredProjects;
     }
 
@@ -33,7 +33,7 @@ public class ProjectFilter {
         List<Project__c> statusChangedProjects = byStatus(newProjects, status);
 
         for (Project__c project : statusChangedProjects) {
-             
+
             Project__c oldProject = oldProjects.get(project.Id);
 
              if(oldProject.Status__c != project.Status__c) {
