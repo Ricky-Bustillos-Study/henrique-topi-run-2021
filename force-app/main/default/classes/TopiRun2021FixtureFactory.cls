@@ -8,10 +8,10 @@
         TopiRun2021ProjectRequest request = new TopiRun2021ProjectRequest();
         request.name = 'Test Project';
         request.code = '1';
-        request.status = 'Iniciado';
+        request.status = 'Pendente';
         request.startDate = Datetime.now().date();
         request.endDate = Datetime.now().date().addDays(30);
-        request.budget = 150500;
+        request.budget = 60300;
         return request;
     }
     
