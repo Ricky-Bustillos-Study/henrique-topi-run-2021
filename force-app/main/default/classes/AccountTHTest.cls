@@ -6,7 +6,7 @@ public class AccountTHTest {
   @isTest
   public static void givenAccountToEditWhenEditItThenReturnFormattedValidDocumentNumber() {
 
-    User user = [SELECT Name, Id FROM user LIMIT 1];
+    User user = UserFixtureFactory.getUser();
 
     Account accountToEdit = AccountFixtureFactory.createAccount();
     

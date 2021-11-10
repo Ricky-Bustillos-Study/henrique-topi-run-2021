@@ -14,7 +14,4 @@ public class ViaCepZipCodeAddressResponse {
     public String gia;
     public String ddd;
     public String siafi;
-
-    public ViaCepZipCodeAddressResponse() {
-    }
 }

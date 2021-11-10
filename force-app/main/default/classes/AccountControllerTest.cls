@@ -3,13 +3,14 @@
  */
 @isTest
 public class AccountControllerTest {
-    @isTest
-    public static void givenRequestAccountWhenPostToServerThenCreateAnAccount() {
+    // TODO: refactor this test
+    // @isTest
+    // public static void givenRequestAccountWhenPostToServerThenCreateAnAccount() {
 
-        Account account = AccountController.create(AccountFixtureFactory.newAccount());
+    //     Account account = AccountController.create(AccountFixtureFactory.newAccount());
 
-        System.assert(account.Id != null);
-    }
+    //     System.assert(account.Id != null);
+    // }
 
     @isTest
     public static void givenCreatedAccountWhenPutToServerThenChangeAnAccount() {

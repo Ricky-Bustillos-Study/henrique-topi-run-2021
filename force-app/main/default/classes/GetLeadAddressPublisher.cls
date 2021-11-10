@@ -15,6 +15,9 @@ public class GetLeadAddressPublisher {
     public void publish(List<Lead> leads) {
         
         for (Lead lead : leads) {
+            // Com future method
+            // GetLeadAddressPublisher.publish(lead.Id);
+            // Com Queueable
             System.enqueueJob(new QueuedGetLeadAddressOutbound( new Lead( Id = lead.Id, PostalCode = lead.PostalCode) ));
         }
     }
