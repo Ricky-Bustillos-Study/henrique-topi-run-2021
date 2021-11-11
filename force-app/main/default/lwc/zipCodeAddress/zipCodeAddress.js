@@ -1,8 +1,12 @@
-import { api, LightningElement } from 'lwc';
+import { api, LightningElement, track } from 'lwc';
+import findAddressByZipCode from '@salesforce/apex/ZipCodeController.findAddressByZipCode';
 
 export default class ZipCodeAddress extends LightningElement {
 
   @api label;
+
+  @track address = {};
+
   @api
   get zipCode() {
     return this._zipCode;
@@ -48,6 +52,13 @@ export default class ZipCodeAddress extends LightningElement {
 
   handleChange(event) {
     this.zipCode = event.target.value;
+    this.findAddress();
+  }
+
+  findAddress() {
+    findAddressByZipCode({ zipCode: this.zipCode })
+      .then(result => this.address = result)
+      .catch(error => console.log("Error: ", error))
   }
 
 }
