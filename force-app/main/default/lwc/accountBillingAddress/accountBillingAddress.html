@@ -43,6 +43,8 @@
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_2-of-3">
 					<lightning-input type="text"
 						label="Endereço"
+						onblur={handleChange}
+						name="street"
 						required
 						max-length="255"
 						message-when-value-missing="Favor, informar o endereço">
@@ -53,6 +55,8 @@
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
 					<lightning-input type="text"
 						label="Número"
+						onblur={handleChange}
+						name="streetNumber"
 						pattern="[a-zA-Z0-9]{1,20}"
 						max-length="20"
 						message-when-pattern-mismatch="Favor, não utilize caracteres especiais">
@@ -63,21 +67,29 @@
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
 					<lightning-input type="text"
 						label="Complemento"
+						onblur={handleChange}
+						name="streetAditionalInfo"
 						max-length="255">
 					</lightning-input>
 				</div>
 
+				<!-- Estado -->
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
 					<lightning-combobox
 						label="Estado"
+						onblur={handleChange}
+						name="state"
 						required
 						options={states}>
 					</lightning-combobox>
 				</div>
 
+				<!-- Cidade -->
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
 					<lightning-combobox
 						label="Cidade"
+						onblur={handleChange}
+						name="city"
 						required>
 					</lightning-combobox>
 				</div>

@@ -36,8 +36,8 @@ export default class AccountBillingAddress extends LightningElement {
   street;
   streetNumber;
   streetAditionalInfo;
-  city;
   state;
+  city;
 
   constructor() {
     super();
@@ -69,6 +69,10 @@ export default class AccountBillingAddress extends LightningElement {
 
   handleSave(event) {
     this.isValid() && console.log('Tudo validado');
+  }
+
+  handleChange(event) {
+    this[event.target.name] = event.target.value;
   }
 
 }

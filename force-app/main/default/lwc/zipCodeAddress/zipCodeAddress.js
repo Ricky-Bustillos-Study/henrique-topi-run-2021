@@ -46,4 +46,8 @@ export default class ZipCodeAddress extends LightningElement {
     return true;
   }
 
+  handleChange(event) {
+    this.zipCode = event.target.value;
+  }
+
 }
