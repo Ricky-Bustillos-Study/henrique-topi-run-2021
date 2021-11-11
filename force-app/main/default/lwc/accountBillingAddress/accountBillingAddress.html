@@ -31,16 +31,12 @@
 				<!-- ZipCode -->
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
 
-					<lightning-input type="text"
+					<c-zip-code-address
+						zip-code={zipCode}
 						label="CEP"
 						required
-						max-length="9"
-						pattern="[0-9]{5}-[0-9]{3}"
-						message-when-pattern-mismatch="Favor, informar de acordo com o padrão"
-						message-when-value-missing="Favor, informar o CEP"
-						value=""
-						placeholder="00000-000">
-					</lightning-input>
+					></c-zip-code-address>
+					
 				</div>
 
 				<!-- Street -->
@@ -84,6 +80,15 @@
 						label="Cidade"
 						required>
 					</lightning-combobox>
+				</div>
+
+				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">
+					<lightning-button
+						variant="slds-assistive-text"
+						label="Salvar"
+						onclick={handleSave}
+						>
+					</lightning-button>
 				</div>
 
 			</div>

@@ -41,10 +41,34 @@ export default class AccountBillingAddress extends LightningElement {
 
   constructor() {
     super();
+    console.log('AccountBillingAddress constructor');
+  }
+
+  connectedCallback() {
+    this.zipCode = '07132-030';
+    console.log('AccountBillingAddress connected');
+  }
+  
+  renderedCallback() {
+    console.log('AccountBillingAddress rendered');
+  }
+
+  disconnectedCallback() {
+    console.log('AccountBillingAddress disconnected');
   }
 
   get states() {
     return STATES;
+  }
+
+  isValid() {
+    const component = this.template.querySelector('c-zip-code-address');
+
+    console.log( component.isValid() );
+  }
+
+  handleSave(event) {
+    this.isValid() && console.log('Tudo validado');
   }
 
 }
