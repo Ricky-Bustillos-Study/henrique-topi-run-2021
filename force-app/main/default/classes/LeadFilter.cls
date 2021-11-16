@@ -10,6 +10,10 @@ public class LeadFilter {
 
         for (Lead lead : newLeads) {
 
+            if(oldLeads == null) {
+                filteredLeads.add(lead);
+                continue;
+            }
             Lead oldLead = oldLeads.get(lead.Id);
 
             if( String.isNotEmpty(lead.PostalCode) && oldLead == null) {
