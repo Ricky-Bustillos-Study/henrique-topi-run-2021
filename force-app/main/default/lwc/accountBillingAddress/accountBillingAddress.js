@@ -1,4 +1,6 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire } from 'lwc';
+import { getPicklistValues } from 'lightning/uiObjectInfoApi';
+import BILLING_STATE from '@salesforce/schema/Account.BillingState__c';
 
 const STATES = [
   { label: 'Acre', value:'AC'},
@@ -39,6 +41,11 @@ export default class AccountBillingAddress extends LightningElement {
   state;
   city;
 
+  @wire(getPicklistValues, { recordTypeId: '012000000000000AAA', fieldApiName: BILLING_STATE })
+  getStates({data}) {
+    return data;
+  }
+
   constructor() {
     super();
     console.log('AccountBillingAddress constructor');
@@ -68,11 +75,22 @@ export default class AccountBillingAddress extends LightningElement {
   }
 
   handleSave(event) {
-    this.isValid() && console.log('Tudo validado');
+    if(this.isValid() ) console.log('Tudo validado');
   }
 
   handleChange(event) {
     this[event.target.name] = event.target.value;
+  }
+
+  handleAddressFound(event) {
+    this.street = event.detail.street;
+    this.streetAditionalInfo = event.detail.streetAditionalInfo;
+    this.city = event.detail.city;
+    this.state = event.detail.state;
+  }
+
+  handleSelectedCity(event) {
+    this.city = event.detail.cityCode;
   }
 
 }

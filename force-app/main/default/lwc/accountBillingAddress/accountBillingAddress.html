@@ -11,13 +11,13 @@
 						<svg class="slds-icon slds-icon_small" aria-hidden="true">
 							<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
 						</svg>
-						<span class="slds-assistive-text">account</span>
+						<span class="slds-assistive-text">endereço de cobrança</span>
 					</span>
 				</div>
 				<div class="slds-media__body">
 					<h2 class="slds-card__header-title">
 						<a href="#" class="slds-card__header-link slds-truncate" title="Accounts">
-							<span>Accounts</span>
+							<span>Endereço de cobrança</span>
 						</a>
 					</h2>
 				</div>
@@ -35,6 +35,7 @@
 						zip-code={zipCode}
 						label="CEP"
 						required
+						onaddressfound={handleAddressFound}
 					></c-zip-code-address>
 					
 				</div>
@@ -45,6 +46,7 @@
 						label="Endereço"
 						onblur={handleChange}
 						name="street"
+						value={street}
 						required
 						max-length="255"
 						message-when-value-missing="Favor, informar o endereço">
@@ -57,6 +59,7 @@
 						label="Número"
 						onblur={handleChange}
 						name="streetNumber"
+						value={streetNumber}
 						pattern="[a-zA-Z0-9]{1,20}"
 						max-length="20"
 						message-when-pattern-mismatch="Favor, não utilize caracteres especiais">
@@ -69,6 +72,7 @@
 						label="Complemento"
 						onblur={handleChange}
 						name="streetAditionalInfo"
+						value={streetAditionalInfo}
 						max-length="255">
 					</lightning-input>
 				</div>
@@ -79,6 +83,7 @@
 						label="Estado"
 						onblur={handleChange}
 						name="state"
+						value={state}
 						required
 						options={states}>
 					</lightning-combobox>
@@ -86,12 +91,13 @@
 
 				<!-- Cidade -->
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3">
-					<lightning-combobox
-						label="Cidade"
-						onblur={handleChange}
-						name="city"
-						required>
-					</lightning-combobox>
+					
+					<c-city
+						state={state}
+						oncityselected={handleSelectedCity}
+						required
+					></c-city>
+
 				</div>
 
 				<div class="slds-col slds-var-p-horizontal_small slds-var-m-bottom_small slds-small-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_1-of-1">

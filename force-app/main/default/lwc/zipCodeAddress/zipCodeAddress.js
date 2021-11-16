@@ -42,9 +42,9 @@ export default class ZipCodeAddress extends LightningElement {
 
   @api
   isValid() {
-    const input = this.template.querySelector('lightning-input');
-    if (input.checkValidity()) {
-      input.reportValidity();
+    const inputComponent = this.template.querySelector('lightning-input');
+    if (!inputComponent.checkValidity()) {
+      inputComponent.reportValidity();
       return false;
     }
     return true;
@@ -52,13 +52,21 @@ export default class ZipCodeAddress extends LightningElement {
 
   handleChange(event) {
     this.zipCode = event.target.value;
-    this.findAddress();
+    this.isValid && this.findAddress();
   }
 
   findAddress() {
     findAddressByZipCode({ zipCode: this.zipCode })
-      .then(result => this.address = result)
+      .then(result => {
+        this.address = result;
+        this.publishAddressFoundEvent();
+      })
       .catch(error => console.log("Error: ", error))
+  }
+
+  publishAddressFoundEvent() {
+    const event = new CustomEvent('addressfound', { detail: this.address });
+    this.dispatchEvent(event);
   }
 
 }
